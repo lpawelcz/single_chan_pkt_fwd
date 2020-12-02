@@ -61,6 +61,8 @@ enum sf_t { SF7=7, SF8, SF9, SF10, SF11, SF12 };
  * Configure these values!
  *
  *******************************************************************************/
+// Set internet interface name, if you are connecting with WiFi, then it will be wlan0 or smth else
+#define IFACE "wlan0"
 
 // SX1272 - Raspberry connections
 int ssPin = 6;
@@ -556,7 +558,7 @@ int main () {
     si_other.sin_port = htons(PORT);
 
     ifr.ifr_addr.sa_family = AF_INET;
-    strncpy(ifr.ifr_name, "eth0", IFNAMSIZ-1);  // can we rely on eth0?
+    strncpy(ifr.ifr_name, IFACE, IFNAMSIZ-1);  // can we rely on eth0?
     ioctl(s, SIOCGIFHWADDR, &ifr);
 
     /* display result */
